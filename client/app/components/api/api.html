@@ -1,0 +1,88 @@
+<div class="page-title">
+  <div class="title">
+    <h1>API管理</h1>
+  </div>
+</div>
+<div class="conter-wrapper">
+	<div class="panel panel-primary">
+	    <div class="panel-body">
+	    	<form class="form-horizontal">
+				<div class="form-group">
+					<div class="col-sm-4">
+						<label for="apiName" class="col-sm-4 control-label">API名称：</label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" placeholder="请输入API名称" id="apiName" ng-model="vm.queryData.apiName">
+						</div>
+					</div>
+					<div class="col-sm-8 creatDate">
+						<label for="creatDate" class="col-sm-2 control-label">创建时间：</label>
+						<new-datetimepicker
+			                type="range"
+			                start-model=vm.queryData.startTime
+			                end-model=vm.queryData.endTime
+			              ></new-datetimepicker>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-4">
+						<label class="col-sm-4 control-label">API状态：</label>
+						<div class="col-sm-8">
+							<select class="form-control" id="selectVersion" ng-model="vm.queryData.status">
+								<option value="">全部</option>
+								<option value="2">已发布</option>
+								<option value="1">未发布</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-sm-8 devId">
+						<label for="deveId" class="col-sm-3 control-label">开发者邮箱：</label>
+						<div class="col-sm-4">
+							<input type="text" class="form-control" placeholder="请输入开发者邮箱" id="deveId" ng-model="vm.queryData.devId">
+						</div>
+					</div>
+				</div>
+			</form>
+	    </div>
+	    <div class="panel-footer">
+	    	<bp-button type="default" ng-click="vm.reset()">清空条件</bp-button>
+	    	<bp-button type="primary" ng-click="vm.sendQuery()">搜索</bp-button>
+	    </div>
+	</div>
+	<div class="table-container">
+	  <div class="table-wrapper ng-scope ng-table">
+		<table class="table table-bordered table-hover apiTable" ng-table="vm.tableParams">
+		  <thead>
+			<tr>
+			  <th style="width: 10%;">API编号</th>
+			  <th style="width: 10%;">API名称</th>
+			  <th style="width: 16%;">创建时间</th>
+			  <th style="width: 10%;">状态</th>
+			  <th style="width: 12%;">开发者用户名</th>
+			  <th style="width: 12%;">开发者邮箱</th>
+			  <th style="width: 8%;">价格</th>
+			  <th style="width: 8%;">订阅量</th>
+			  <th style="width: 24%;">操作</th>
+			</tr>
+		  </thead>
+		  <tbody ng-if="vm.tableParams.data.length != 0">
+		    <tr ng-repeat="row in $data">
+			  <td>{{row.ApiID}}</td>
+			  <td>{{row.ApiName}}</td>
+			  <td>{{row.CreateTime}}</td>
+			  <td>{{row.Status}}</td>
+			  <td>{{row.UserName}}</td>
+			  <td>{{row.UserEmail}}</td>
+			  <td>{{row.price}}</td>
+			  <td>{{row.DevAmount}}<span ng-if="row.DevAmount == undefined">0</span></td>
+			  <td>
+			  	<bp-button type="info" ng-click="vm.toInfo(row)">查看</bp-button>
+			  	<bp-button type="info" ng-if="row.Status == '已发布'" ng-click="vm.toData(row)">数据</bp-button>
+			  </td>
+		    </tr>
+		  </tbody>
+		</table>
+		<div class="total" ng-if="vm.loadPromise.total > 0">共 {{vm.loadPromise.total}} 条记录</div>
+		<div class="no-result" ng-if="vm.tableParams.data.length == 0 || vm.tableParams.data == null">你的查询条件错误或查询结果不存在，请重新查询！ </div>
+	  </div>
+	</div>
+</div>

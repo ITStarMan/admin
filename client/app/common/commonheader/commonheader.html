@@ -1,0 +1,21 @@
+<div class="main-header">
+	<div class="menu-logo">
+		<a href="/">
+			<img ng-src="{{vm.logoImg}}" alt="LOGO">
+			<span class="menu-title">BO | 营运中心</span>
+		</a>
+	</div>
+
+	<ul class="user-container">
+		<li ng-class="{'active': list.active}" 
+				ng-repeat="list in vm.headerList"
+				ng-click="vm.changeHeader(list, true)">
+			<a>{{list.name}}</a>
+		</li>
+	</ul>
+	
+	<div class="user-info">
+		<div class="user-name">{{vm.userInfo.userName}}</div>
+		<a href="javascript:;" ng-click="vm.logout()">退出</a>
+	</div>
+</div>

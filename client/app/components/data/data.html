@@ -1,0 +1,19 @@
+<div class="page-title">
+  <div class="title">
+    <h1>API数据</h1>
+  </div>
+</div>
+<div class="conter-wrapper">
+	<div class="dbBox">
+		<iframe src="{{vm.status}}" frameborder="0"></iframe>
+	</div>
+	<div class="dbBox">
+		<iframe src="{{vm.request}}" frameborder="0"></iframe>
+	</div>
+	<div class="dbBox">
+		<iframe src="{{vm.mean}}" frameborder="0"></iframe>
+	</div>
+	<div class="return">
+		<bp-button type="info" ng-click="vm.toReturn()">返回</bp-button>
+	</div>
+</div>

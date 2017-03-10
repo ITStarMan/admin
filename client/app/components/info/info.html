@@ -1,0 +1,69 @@
+<!-- <div class="examine">
+	<bp-button type="info">审核通过</bp-button>
+</div> -->
+<div class="page-title">
+  <div class="title">
+    <h1>API详情</h1>
+  </div>
+</div>
+<div class="conter-wrapper">
+	<div class="bp-container">
+		    <table class="basicinfo-container ng-scope" >
+		      <tbody><tr>
+		        <td class="basic-lable">API名称：</td>
+		        <td class="basic-content ng-binding">{{vm.infoContent.ApiName}}</td>
+		      </tr>
+		      <tr>
+		        <td class="basic-lable ng-scope">基础URL：</td>
+		        <td class="basic-content ng-binding">{{vm.infoContent.TargetBaseUri}}</td>
+		      </tr>    
+		      <tr>
+		        <td class="basic-lable ng-scope">标签：</td>
+		        <td class="basic-content ng-binding">{{vm.infoContent.Categories}}</td>
+		      </tr>
+		      <tr>
+		        <td class="basic-lable ng-scope">描述：</td>
+		        <td class="basic-content ng-binding">{{vm.infoContent.ApiDesc}}</td>
+		      </tr>
+		      <tr>
+		        <td class="basic-lable ng-scope">LOGO：</td>
+		        <td class="basic-content">
+		          <img alt="app logo" class="img-rounded" ng-src="{{vm.infoContent.Logo}}">
+		        </td>
+		      </tr>
+		    </tbody>
+		    </table>
+	</div>
+    <div class="table-container">
+	  <div class="table-wrapper ng-scope ng-table">
+		<table class="table table-bordered table-hover" ng-table="vm.tableParams">
+		  <thead>
+			<tr>
+			  <th style="width: 15%;">路径分组</th>
+			  <th style="width: 20%;">路径别名</th>
+			  <th style="width: 15%;">路径编号</th>
+			  <th style="width: 20%;">URL路径</th>
+			  <th style="width: 15%;">请求方式</th>
+			  <th style="width: 15%;">操作</th>
+			</tr>
+		  </thead>
+		  <tbody ng-if="vm.tableParams.data.length != 0">
+		    <tr ng-repeat="row in $data">
+			  <td>{{row.GroupID}}</td>
+			  <td>{{row.EndpointName}}</td>
+			  <td>{{row.EndpointID}}</td>
+			  <td>{{row.UriRoute}}</td>
+			  <td>{{row.Method}}</td>
+			  <td>
+			  	<bp-button type="info" ng-click="vm.toEndpoint(row)">查看</bp-button>
+			  </td>
+		    </tr>
+		  </tbody>
+		</table>
+		<div class="no-result" ng-if="vm.tableParams.data.length == 0 || vm.tableParams.data == null">结果为空</div>
+	  </div>
+	</div>
+	<div class="return">
+		<bp-button type="info" ng-click="vm.toReturn()">返回</bp-button>
+	</div>
+</div>

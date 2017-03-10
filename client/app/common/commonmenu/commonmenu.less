@@ -1,0 +1,24 @@
+.menu-container {
+	position: fixed;
+	top: 60px;
+	bottom: 0px;
+	width: 240px;
+	height: 100%;
+	font-size: 16px;
+	z-index: 30;
+	background: #fff;
+	overflow-y: auto;
+	-webkit-transition: all 0.2s ease-in-out;
+	-o-transition: all 0.2s ease-in-out;
+	transition: all 0.2s ease-in-out;
+	.f-menu-dark {
+		background: #fff;
+		color: #666;
+	} 
+	.f-menu-dark.f-menu-inline .f-menu-item-selected {
+		background-color: #2692fb;
+	}
+}
+.nav-menu-root > li ul.f-menu-submenu-open{
+	padding-left: 0;
+}

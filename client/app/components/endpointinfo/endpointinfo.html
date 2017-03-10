@@ -1,0 +1,118 @@
+<div class="page-title">
+  <div class="title">
+    <h1>路径详情</h1>
+  </div>
+</div>
+<div class="conter-wrapper">
+  <form class="form-horizontal">
+	<div class="panel panel-primary">
+	    <div class="panel-heading">
+	      <h3 class="panel-title">URL路径</h3>
+	    </div>
+	    <div class="panel-body">
+	    	<div class="route">
+				<div class="form-group">
+					<label class="col-sm-2 control-label">路径名称：</label>
+					<div class="col-sm-8">
+						<p class="form-control-static">{{vm.route.EndpointName}}</p>
+					</div>	
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">URL路径：</label>
+					<div class="col-sm-8">
+						<p class="form-control-static">{{vm.route.UriRoute}}</p>
+					</div>	
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">请求方式：</label>
+					<div class="col-sm-8">
+						<p class="form-control-static">{{vm.route.Method}}</p>
+					</div>	
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">路径描述：</label>
+					<div class="col-sm-8">
+						<p class="form-control-static">{{vm.route.EndpointDesc}}</p>
+					</div>	
+				</div>
+			</div>
+	    </div>
+	</div>
+	<div class="panel panel-primary">
+	    <div class="panel-heading">
+	      	<h3 class="panel-title">URL参数</h3>
+	    </div>
+	    <div class="panel-body">
+			<div class="params"  ng-repeat="item in vm.urldata">
+				<div class="form-group">
+					<label class="col-sm-2 control-label">参数名称：</label>
+					<div class="col-sm-8">
+						<p class="form-control-static">{{item.ParamName}}</p>
+					</div>	
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">条件：</label>
+					<div class="col-sm-8">
+						<p class="form-control-static">{{item.Condition}}</p>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">类型：</label>
+					<div class="col-sm-8">
+						<p class="form-control-static">{{item.ParamType}}</p>
+					</div>	
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">参数描述：</label>
+					<div class="col-sm-8">
+						<p class="form-control-static">{{item.Description}}</p>
+					</div>	
+				</div>
+			</div>
+			<div ng-if="vm.urldata.length == 0">
+				<p>参数为空</p>
+			</div>
+	    </div>
+	</div>
+	<div class="panel panel-primary">
+	    <div class="panel-heading">
+	      	<h3 class="panel-title">请求头</h3>
+	    </div>
+	    <div class="panel-body">
+	    	<div class="params" ng-repeat="item in vm.headerdata">
+				<div class="form-group">
+					<label class="col-sm-2 control-label">请求头名称：</label>
+					<div class="col-sm-8">
+						<p class="form-control-static">{{item.ParamName}}</p>
+					</div>	
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">条件：</label>
+					<div class="col-sm-8">
+						<p class="form-control-static">{{item.Condition}}</p>
+					</div>	
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">类型：</label>
+					<div class="col-sm-8">
+						<p class="form-control-static">{{item.ParamType}}</p>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">参数描述：</label>
+					<div class="col-sm-8">
+						<p class="form-control-static">{{item.Description}}</p>
+					</div>	
+				</div>
+			</div>
+			<div ng-if="vm.headerdata.length == 0">
+				<p>参数为空</p>
+			</div>
+	    </div>
+	</div>
+	
+  </form>
+  	<div class="return">
+		<bp-button type="info" ng-click="vm.toReturn()">返回</bp-button>
+	</div>
+</div>

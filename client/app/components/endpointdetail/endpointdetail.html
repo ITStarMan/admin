@@ -1,0 +1,165 @@
+<div class="page-title">
+  <div class="title">
+    <h1>{{ vm.name }}</h1>
+  </div>
+</div>
+<div class="conter-wrapper">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title">所属API基础信息</h3>
+    </div>
+  <div class="panel-body">
+    <form class="form-horizontal">
+      <div class="form-group">
+        <label class="col-sm-2 control-label">API名称：</label>
+        <div class="col-sm-8">
+              <p class="form-control-static">{{ vm.APIdetail.ApiName }}</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">基础URL：</label>
+        <div class="col-sm-8">
+              <p class="form-control-static">{{ vm.APIdetail.TargetBaseUri }}</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">标签：</label>
+        <div class="col-sm-8">
+              <p class="form-control-static">{{ vm.APIdetail.Categories }}</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">描述：</label>
+        <div class="col-sm-8">
+              <p class="form-control-static">{{ vm.APIdetail.ApiDesc }}</p>
+        </div>
+      </div>
+    </form>
+  </div>
+  </div>
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title">路径基础信息</h3>
+    </div>
+  <div class="panel-body">
+    <form class="form-horizontal">
+      <div class="form-group">
+        <label class="col-sm-2 control-label">路径名称：</label>
+        <div class="col-sm-8">
+              <p class="form-control-static">{{ vm.enpointDetail.EndpointName }}</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">URL路径：</label>
+        <div class="col-sm-8">
+              <p class="form-control-static">{{ vm.enpointDetail.UriRoute }}</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">请求方式：</label>
+        <div class="col-sm-8">
+              <p class="form-control-static">{{ vm.enpointDetail.Method }}</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">路径描述：</label>
+        <div class="col-sm-8">
+              <p class="form-control-static">{{ vm.enpointDetail.EndpointDesc }}</p>
+        </div>
+      </div>
+      <div class="form-group"></div>
+      <div class="form-group"></div>
+      <div class="form-group" ng-show="vm.enpointDetail.FormParam == null && vm.enpointDetail.HeaderParam == null">
+        <div class="col-sm-5"></div>
+        <div class="col-sm-7">
+          <bp-button type="info" ng-click="vm.goBack()">返回</bp-button>
+        </div>
+      </div>
+    </form>
+  </div>
+  </div>
+
+  <div class="panel panel-primary" ng-show="vm.enpointDetail.FormParam != null">
+    <div class="panel-heading">
+      <h3 class="panel-title">URL参数</h3>
+    </div>
+  <div class="panel-body">
+    <form class="form-horizontal" ng-repeat="formParam in vm.enpointDetail.FormParam">
+      <div class="form-group">
+        <label class="col-sm-2 control-label">参数名称：</label>
+        <div class="col-sm-8">
+              <p class="form-control-static">{{ formParam.ParamName }}</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">条件：</label>
+        <div class="col-sm-8">
+              <p class="form-control-static">{{ formParam.Condition == 1 ? '必选' : '' }}{{ formParam.Condition == 2 ? '可选' : '' }}{{ formParam.Condition == 3 ? '常量' : '' }}</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">类型：</label>
+        <div class="col-sm-8">
+              <p class="form-control-static">{{ formParam.ParamType == 1 ? 'String' : ''  }}{{ formParam.ParamType == 2 ? 'Number' : '' }}{{ formParam.ParamType == 3 ? 'Boolean' : '' }}</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">参数描述：</label>
+        <div class="col-sm-8">
+              <p class="form-control-static">{{ formParam.Description }}</p>
+        </div>
+      </div>
+      <div class="form-group"></div>
+      <div class="form-group"></div>
+    </form>
+    <div class="form-group" ng-show="vm.enpointDetail.HeaderParam == null">
+      <div class="col-sm-5"></div>
+      <div class="col-sm-7">
+        <bp-button type="info" ng-click="vm.goBack()">返回</bp-button>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <div class="panel panel-primary" ng-show="vm.enpointDetail.HeaderParam != null">
+    <div class="panel-heading">
+      <h3 class="panel-title">请求头</h3>
+    </div>
+  <div class="panel-body">
+    <form class="form-horizontal" ng-repeat="headerParam in vm.enpointDetail.HeaderParam">
+      <div class="form-group">
+        <label class="col-sm-2 control-label">请求头名称：</label>
+        <div class="col-sm-8">
+              <p class="form-control-static">{{ headerParam.ParamName }}</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">条件：</label>
+        <div class="col-sm-8">
+              <p class="form-control-static">{{ headerParam.Condition == 1 ? '必选' : '' }}{{ headerParam.Condition == 2 ? '可选' : '' }}{{ headerParam.Condition == 3 ? '常量' : '' }}</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">类型：</label>
+        <div class="col-sm-8">
+              <p class="form-control-static">{{ headerParam.ParamType == 1 ? 'String' : '' }}{{ headerParam.ParamType == 2 ? 'Number' : ''  }}{{ headerParam.ParamType == 3 ? 'Boolean' : ''  }}</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">参数描述：</label>
+        <div class="col-sm-8">
+              <p class="form-control-static">{{ headerParam.Description }}</p>
+        </div>
+      </div>
+    </form>
+    <div class="form-group"></div>
+    <div class="form-group"></div>
+    <div class="form-group">
+      <div class="col-sm-5"></div>
+      <div class="col-sm-7">
+        <bp-button type="info" ng-click="vm.goBack()">返回</bp-button>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>

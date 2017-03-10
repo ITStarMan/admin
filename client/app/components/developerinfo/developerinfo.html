@@ -1,0 +1,67 @@
+<div class="page-title">
+  <div class="title">
+    <h1>{{ vm.name }}</h1>
+  </div>
+</div>
+<div class="conter-wrapper">
+  <div class="panel panel-primary">
+    <div class="panel-body">
+        <form class="form-horizontal" name="goodsForm" >
+          <div class="form-group">
+              <label for="inputName" class="col-sm-2 control-label">用户名：</label>
+              <div class="col-sm-5">
+                <p class="form-control-static">{{ vm.developerinfo._source.nick }}</p>
+              </div>
+          </div>
+          <div class="form-group">
+              <label for="inputName" class="col-sm-2 control-label">邮箱：</label>
+              <div class="col-sm-5">
+                <p class="form-control-static">{{ vm.developerinfo._source.email }}</p>
+              </div>
+          </div>
+          <div class="form-group" ng-show="false">
+              <label for="inputName" class="col-sm-2 control-label">手机号：</label>
+              <div class="col-sm-5">
+                <p class="form-control-static">{{ vm.developerinfo._source.mobile == null ? '暂无手机号信息' : vm.developerinfo._source.mobile }}</p>
+              </div>
+          </div>
+          <div class="form-group">
+              <label for="inputName" class="col-sm-2 control-label">姓名：</label>
+              <div class="col-sm-5">
+                <p class="form-control-static">{{ vm.developerinfo._source.FullName }}</p>
+              </div>
+          </div>
+          <div class="form-group">
+              <label for="inputName" class="col-sm-2 control-label">所在公司：</label>
+              <div class="col-sm-5">
+                <p class="form-control-static">{{ vm.developerinfo._source.Company }}</p>
+              </div>
+          </div>
+          <div class="form-group">
+              <label for="inputName" class="col-sm-2 control-label">公司地址：</label>
+              <div class="col-sm-5">
+                <p class="form-control-static">{{ vm.developerinfo._source.Location }}</p>
+              </div>
+          </div>
+          <div class="form-group">
+              <label for="inputName" class="col-sm-2 control-label">公司网址：</label>
+              <div class="col-sm-5">
+                <p class="form-control-static">{{ vm.developerinfo._source.Website }}</p>
+              </div>
+          </div>
+          <div class="form-group">
+              <label for="inputName" class="col-sm-2 control-label">公司简介：</label>
+              <div class="col-sm-5">
+                <p class="form-control-static">{{ vm.developerinfo._source.Bio == '' ? '暂无公司简介' : vm.developerinfo._source.Bio}}</p>
+              </div>
+          </div>
+        </form>
+        <div class="form-group">
+          <div class="col-sm-5"></div>
+          <div class="col-sm-7">
+            <bp-button type="info" ng-click="vm.goBack()">返回</bp-button>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,102 @@
+<div class="page-title">
+  <div class="title">
+    <h1>{{ vm.name }}</h1>
+  </div>
+</div>
+<div class="conter-wrapper">
+  <div class="panel panel-primary">
+      <div class="panel-body">
+        <form class="form-horizontal">
+          <div class="form-group">
+            <div class="form-group col-sm-4">
+      				<label for="inputUserName" class="col-sm-4 control-label">路径名称：</label>
+      				<div class="col-sm-8">
+      					<input  class="form-control" ng-model="vm.query.EndpointName" id="inputUserName"  placeholder="请输入路径名称">
+      				</div>
+      			</div>
+            <div class="form-group col-sm-4">
+              <label for="inputUserName" class="col-sm-4 control-label">路径编号：</label>
+              <div class="col-sm-8">
+                <input  class="form-control" id="inputUserName" placeholder="请输入路径编号(数字)" type='text' onkeyup="(this.v=function(){this.value=this.value.replace(/[^0-9]+/,'');}).call(this)" onblur="this.v();"  ng-model="vm.query.EndpointID" />
+              </div>
+            </div>
+            <div class="form-group col-sm-4">
+              <label for="inputUserName" class="col-sm-4 control-label">URL路径：</label>
+              <div class="col-sm-8">
+                <input class="form-control" ng-model="vm.query.UriRoute" id="inputUserName" placeholder="请输入URL路径">
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="form-group col-sm-4">
+              <label for="inputUserName" class="col-sm-4 control-label">所属API ID：</label>
+              <div class="col-sm-8">
+                <input   class="form-control" ng-model="vm.query.ApiID" id="inputUserName" placeholder="请输入API ID(数字)" type='text' onkeyup="(this.v=function(){this.value=this.value.replace(/[^0-9]+/,'');}).call(this)" onblur="this.v();" />
+              </div>
+            </div>
+            <div class="form-group col-sm-4">
+              <label for="inputUserName" class="col-sm-4 control-label">开发者邮箱：</label>
+              <div class="col-sm-8">
+                <input  class="form-control" ng-model="vm.query.UserEmail" id="inputUserName" placeholder="请输入开发者邮箱">
+              </div>
+            </div>
+            <div class="form-group col-sm-4">
+              <label for="inputUserName" class="col-sm-4 control-label">开发者名称：</label>
+              <div class="col-sm-8">
+                <input class="form-control" ng-model="vm.query.UserName" id="inputUserName" placeholder="请输入开发者名称">
+              </div>
+            </div>
+            <div class="form-group col-sm-3" ng-show="false">
+              <label for="selectVersion" class="col-sm-4 control-label">API状态：</label>
+              <div class="col-sm-8">
+                <select class="form-control"  ng-model="vm.query.Status" id="selectVersion">
+                  <option value="">全部</option>
+                  <option value="0">发布</option>
+                  <option value="1">未发布</option>
+                </select>
+              </div>
+            </div>
+          </div>
+      </form>
+      </div>
+      <div class="panel-footer">
+        <bp-button type="default" ng-click="vm.reset()">清空条件</bp-button>
+        <bp-button type="primary" ng-click="vm.Submit()">搜索</bp-button>
+      </div>
+  </div>
+
+
+  <div class="table-container">
+    <div class="table-wrapper ng-scope ng-table">
+    <table class="table table-bordered table-hover" ng-table="vm.tableParams">
+      <thead>
+      <tr>
+        <th style="width: 10%;text-align:center;">路径编号</th>
+        <th style="width: 10%;text-align:center;">路径名称</th>
+        <th style="width: 20%;text-align:center;">URL路径</th>
+        <th style="width: 20%;text-align:center;">开发者邮箱</th>
+        <th style="width: 10%;text-align:center;">开发者名称</th>
+        <th style="width: 10%;text-align:center;">所属API ID</th>
+        <th style="width: 10%;text-align:center;">操作</th>
+      </tr>
+      </thead>
+      <tbody ng-if="vm.tableParams.data.length != 0">
+        <tr ng-repeat="row in $data track by $index">
+        <td style="word-break:break-all;text-align:center;">{{row.EndpointID}}</td>
+        <td style="word-break:break-all;text-align:center;">{{row.EndpointName}}</td>
+        <td style="word-break:break-all;text-align:center;">{{row.UriRoute}}</td>
+        <td style="word-break:break-all;text-align:center;">{{row.UserEmail}}</td>
+        <td style="word-break:break-all;text-align:center;">{{row.UserName}}</td>
+        <td style="word-break:break-all;text-align:center;">{{row.ApiID}}</td>
+        <td style="word-break:break-all;text-align:center;">
+          <bp-button type="info" ng-click="vm.lookup(row)" disabled="false">查看</bp-button>
+          <bp-button type="info" ng-show="false" ng-click="vm.reviewed(row)" disabled="false">审核通过</bp-button>
+        </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="total" ng-if="vm.loadPromise.total > 0">共 {{vm.loadPromise.total}} 条记录</div>
+    <div class="no-result" ng-if="vm.tableParams.data.length == 0">你的查询条件错误或查询结果不存在，请重新查询！</div>
+    </div>
+  </div>
+</div>

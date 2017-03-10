@@ -1,0 +1,89 @@
+<div class="page-title">
+  <div class="title">
+    <h1>{{ vm.name }}</h1>
+  </div>
+</div>
+<div class="conter-wrapper">
+  <div class="panel panel-primary">
+      <div class="panel-body">
+        <form class="form-horizontal">
+          <div class="form-group">
+            <div class="form-group col-md-4">
+      				<label for="inputUserName" class="col-md-4 control-label">用户名：</label>
+      				<div class="col-md-8">
+      					<input class="form-control" id="inputUserName" ng-model="vm.userName" placeholder="请输入用户名">
+      				</div>
+      			</div>
+            <div class="form-group col-md-4">
+      				<label for="inputEmail" class="col-md-4 control-label">邮箱：</label>
+      				<div class="col-md-8">
+      					<input class="form-control" id="inputEmail" ng-model="vm.email" placeholder="请输入邮箱">
+      				</div>
+      			</div>
+            <div class="form-group col-md-4">
+              <label for="selectVersion" class="col-md-4 control-label">开发者状态：</label>
+          		<div class="col-md-8">
+          			<select class="form-control" ng-model="vm.status" id="selectVersion">
+          				<option value="">全部</option>
+          				<option value="0">正常</option>
+          				<option value="2">冻结</option>
+          			</select>
+          		</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="form-group col-md-4" ng-show="false">
+              <label for="inputPhone" class="col-md-4 control-label">手机号：</label>
+              <div class="col-md-8">
+                <input class="form-control" id="inputPhone" ng-model="vm.phone" placeholder="请输入手机号">
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="panel-footer">
+        <bp-button type="default" ng-click="vm.reset()">清空条件</bp-button>
+        <bp-button type="primary" ng-click="vm.submit()">搜索</bp-button>
+      </div>
+  </div>
+
+
+
+
+
+</div>
+<div class="conter-wrapper">
+  <div class="table-container">
+    <div class="table-wrapper ng-scope ng-table">
+    <table class="table table-bordered table-hover" ng-table="vm.tableParams">
+      <thead>
+      <tr>
+        <th style="width: 10%;text-align:center;">开发者ID</th>
+        <th style="width: 10%;text-align:center;">用户名</th>
+        <th style="width: 20%;text-align:center;">邮箱</th>
+        <th style="width: 20%;text-align:center;">所在公司</th>
+        <th style="width: 10%;text-align:center;">注册时间</th>
+        <th style="width: 10%;text-align:center;">状态</th>
+        <th style="width: 20%;text-align:center;">操作</th>
+      </tr>
+      </thead>
+      <tbody ng-if="vm.tableParams.data.length != 0">
+        <tr ng-repeat="row in $data track by $index">
+        <td style="word-break:break-all;text-align:center;">{{row._id}}</td>
+        <td style="word-break:break-all;text-align:center;">{{row._source.nick}}</td>
+        <td style="word-break:break-all;text-align:center;">{{row._source.email}}</td>
+        <td style="word-break:break-all;text-align:center;">{{row._source.Company == null ? '暂无所在公司信息' : row._source.Company}}</td>
+        <td style="word-break:break-all;text-align:center;">{{row._source.createtime}}</td>
+        <td style="word-break:break-all;text-align:center;">{{row._source.status == 2 ? '冻结' : '正常'}}</td>
+        <td style="word-break:break-all;text-align:center;">
+          <bp-button type="info" ng-click="vm.unfreeze(row)" disabled="false">{{ row._source.status == 0 ? '冻结' : '' }}{{ row._source.status == 1 ? '冻结' : '' }}{{ row._source.status == 2 ? '解除冻结' : '' }}</bp-button>
+          <bp-button type="info" ng-click="vm.lookup(row)" disabled="false">查看</bp-button>
+        </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="total" ng-if="vm.totalCount > 0">共 {{vm.totalCount}} 条记录</div>
+    <div class="no-result" ng-if="vm.tableParams.data.length == 0">你的查询条件错误或查询结果不存在，请重新查询！</div>
+    </div>
+  </div>
+</div>

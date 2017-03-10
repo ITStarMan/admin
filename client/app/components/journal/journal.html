@@ -1,0 +1,102 @@
+<div class="page-title">
+  <div class="title">
+    <h1>{{ vm.name }}</h1>
+  </div>
+</div>
+<div class="conter-wrapper">
+  <div class="panel panel-primary">
+      <div class="panel-body">
+        <form class="form-horizontal">
+          <div class="form-group">
+            <div class="col-sm-4">
+      				<label for="inputUserName" class="col-sm-4 control-label">日志ID：</label>
+      				<div class="col-sm-8">
+                <input  class="form-control" ng-model="vm.queryData.LogID" id="inputUserName" placeholder="请输入日志ID(数字)" type='text' onkeyup="(this.v=function(){this.value=this.value.replace(/[^0-9]+/,'');}).call(this)" onblur="this.v();" />
+      				</div>
+      			</div>
+
+            <div class="col-sm-8 creatDate">
+              <label for="creatDate"  class="col-sm-2 control-label">操作时间：</label>
+                <new-datetimepicker
+                          type="range"
+                          start-model=vm.queryData.startTime
+                          end-model=vm.queryData.endTime
+                        ></new-datetimepicker>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-4">
+              <label for="inputUserName" class="col-sm-4 control-label">对象ID：</label>
+              <div class="col-sm-8">
+                <input  class="form-control" ng-model="vm.queryData.TableID" id="inputUserName" placeholder="请输入对象ID(数字)" type='text' onkeyup="(this.v=function(){this.value=this.value.replace(/[^0-9]+/,'');}).call(this)" onblur="this.v();" />
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <label for="selectVersion" class="col-sm-4 control-label">操作类型：</label>
+          		<div class="col-sm-8">
+          			<select ng-model="vm.queryData.Action" class="form-control" id="selectVersion">
+          				<option value="0">全部</option>
+          				<option value="1">新建</option>
+          				<option value="2">编辑</option>
+          				<option value="3">删除</option>
+          			</select>
+          		</div>
+            </div>
+            <div class="col-sm-4">
+              <label for="inputUserName" class="col-sm-4 control-label">操作者邮箱：</label>
+              <div class="col-sm-8">
+                <input ng-model="vm.queryData.OperatorEmail" class="form-control" id="inputUserName" placeholder="请输入操作者邮箱">
+              </div>
+            </div>
+          </div>
+          <div class="form-group" ng-show="false">
+            <div class="col-sm-4">
+              <label for="inputUserName" class="col-sm-6 control-label">操作者用户名：</label>
+              <div class="col-sm-6">
+                <input ng-model="vm.queryData.OperatorName" class="form-control" id="inputUserName" placeholder="请输入操作者用户名">
+              </div>
+            </div>
+          </div>
+      </form>
+    </div>
+      <div class="panel-footer">
+        <bp-button type="default" ng-click="vm.reset()">清空条件</bp-button>
+        <bp-button type="primary" ng-click="vm.submit()">搜索</bp-button>
+      </div>
+  </div>
+
+  <div class="table-container">
+    <div class="table-container">
+      <div class="table-wrapper ng-scope ng-table">
+      <table class="table table-bordered table-hover" ng-table="vm.tableParams">
+        <thead>
+        <tr>
+          <th style="width: 10%;text-align:center;">日志ID</th>
+          <th style="width: 20%;text-align:center;">操作时间</th>
+          <th style="width: 10%;text-align:center;">操作对象</th>
+          <th style="width: 10%;text-align:center;">对象ID</th>
+          <th style="width: 10%;text-align:center;">操作类型</th>
+          <th style="width: 20%;text-align:center;">操作者邮箱</th>
+          <th style="width: 10%;text-align:center;">操作者用户名</th>
+          <th style="width: 10%;text-align:center;">操作</th>
+        </tr>
+        </thead>
+        <tbody ng-if="vm.tableParams.data.length != 0">
+          <tr ng-repeat="row in $data track by $index">
+          <td style="word-break:break-all;text-align:center;">{{row.LogId}}</td>
+          <td style="word-break:break-all;text-align:center;">{{row.OperatorTime}}</td>
+          <td style="word-break:break-all;text-align:center;">{{row.Table}}</td>
+          <td style="word-break:break-all;text-align:center;">{{row.TableId}}</td>
+          <td style="word-break:break-all;text-align:center;">{{row.Action == 1 ? '新建' : ''}}{{row.Action == 2 ? '编辑' : ''}}{{row.Action == 3 ? '删除' : ''}}</td>
+          <td style="word-break:break-all;text-align:center;">{{row.UserEmail}}</td>
+          <td style="word-break:break-all;text-align:center;">{{row.OperatorName}}</td>
+          <td style="word-break:break-all;text-align:center;"><bp-button type="info" ng-click="vm.lookup(row)" disabled="false">查看</bp-button></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="total" ng-if="vm.loadPromise.total > 0">共 {{vm.loadPromise.total}} 条记录</div>
+      <div class="no-result" ng-if="vm.tableParams.data.length == 0">你的查询条件错误或查询结果不存在，请重新查询！</div>
+    </div>
+  </div>
+  </div>
+</div>
